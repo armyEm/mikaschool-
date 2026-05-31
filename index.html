@@ -4,180 +4,235 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Scholar Portal</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --gold:#D4AF37;--gold-light:#F0D060;--gold-dim:#8A6F1A;
-  --gold-glow:rgba(212,175,55,0.18);--black:#0A0A0A;
-  --surface:#111111;--surface2:#191919;--surface3:#222222;
-  --border:rgba(212,175,55,0.2);--border-bright:rgba(212,175,55,0.5);
-  --text:#F0E6C0;--text-muted:#888070;--text-dim:#4A4035;
-  --radius:10px;--radius-lg:16px;
+  --gold:#D4AF37;--gold-light:#F5DC6A;--gold-dim:#9A7B1E;
+  --gold-glow:rgba(212,175,55,0.2);--black:#080808;
+  --surface:#111111;--surface2:#1A1A1A;--surface3:#242424;
+  --border:rgba(212,175,55,0.18);--border-bright:rgba(212,175,55,0.45);
+  --text:#F2E8C8;--text-muted:#8A7A60;--text-dim:#4A3F2F;
+  --green:#27AE60;--red:#E74C3C;--teal:#4ECDC4;--orange:#F7971E;--purple:#9B59B6;
+  --radius:12px;--radius-lg:18px;--radius-xl:24px;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--text);min-height:100vh;overflow-x:hidden;}
+html{font-size:16px;}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6;}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(212,175,55,0.015) 40px,rgba(212,175,55,0.015) 41px)}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.6;
+  background-image:radial-gradient(ellipse at 20% 20%,rgba(212,175,55,0.04) 0%,transparent 60%),
+  radial-gradient(ellipse at 80% 80%,rgba(212,175,55,0.03) 0%,transparent 60%);}
 
-/* ── LOGIN ── */
-#login-screen{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#1a1400 0%,#0A0A0A 70%)}
-.login-box{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-lg);padding:48px 40px;width:380px;text-align:center;box-shadow:0 0 60px rgba(212,175,55,0.12)}
-.login-crown{font-size:48px;margin-bottom:12px}
-.login-title{font-family:'Cinzel',serif;font-size:24px;color:var(--gold);margin-bottom:6px;letter-spacing:.05em}
-.login-sub{font-size:13px;color:var(--text-muted);margin-bottom:32px}
-.login-box input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;color:var(--text);font-size:16px;font-family:'DM Sans',sans-serif;letter-spacing:.15em;text-align:center;margin-bottom:16px;transition:.2s}
-.login-box input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 12px var(--gold-glow)}
-.btn-gold{width:100%;background:linear-gradient(135deg,var(--gold-dim),var(--gold));border:none;border-radius:var(--radius);padding:14px;color:var(--black);font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:.2s}
-.btn-gold:hover{filter:brightness(1.1);transform:translateY(-1px)}
-#login-error{color:#E74C3C;font-size:13px;margin-top:12px;display:none}
-#login-loading{color:var(--text-muted);font-size:13px;margin-top:12px;display:none}
+/* ══ LOGIN ══ */
+#login-screen{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 40%,#1c1400 0%,#080808 70%);}
+.login-box{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xl);
+  padding:56px 48px;width:420px;text-align:center;box-shadow:0 0 80px rgba(212,175,55,0.1),var(--shadow);}
+.login-crown{font-size:56px;margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(212,175,55,0.4));}
+.login-title{font-family:'Cinzel',serif;font-size:28px;color:var(--gold);margin-bottom:8px;letter-spacing:.06em;}
+.login-sub{font-size:15px;color:var(--text-muted);margin-bottom:36px;line-height:1.5;}
+.login-box input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:16px 20px;color:var(--text);font-size:18px;font-family:'DM Sans',sans-serif;
+  letter-spacing:.2em;text-align:center;margin-bottom:18px;transition:.25s;}
+.login-box input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 16px var(--gold-glow);}
+.btn-gold{width:100%;background:linear-gradient(135deg,var(--gold-dim),var(--gold));border:none;
+  border-radius:var(--radius);padding:16px;color:var(--black);font-family:'Cinzel',serif;
+  font-size:15px;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:.25s;
+  box-shadow:0 4px 16px rgba(212,175,55,0.3);}
+.btn-gold:hover{filter:brightness(1.12);transform:translateY(-2px);box-shadow:0 6px 24px rgba(212,175,55,0.4);}
+.btn-gold:active{transform:translateY(0);}
+#login-error{color:var(--red);font-size:14px;margin-top:14px;display:none;}
+#login-loading{color:var(--text-muted);font-size:14px;margin-top:14px;display:none;}
 
-/* ── APP SHELL ── */
-#app{display:none;min-height:100vh;position:relative;z-index:1}
-.topbar{position:sticky;top:0;z-index:50;background:rgba(10,10,10,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:2px;padding:0 14px;min-height:60px;flex-wrap:wrap;row-gap:0}
-.topbar-logo{font-family:'Cinzel',serif;font-size:15px;color:var(--gold);letter-spacing:.05em;margin-right:6px;white-space:nowrap}
-.topbar-logo span{color:var(--text-muted);font-size:11px;font-family:'DM Sans',sans-serif;margin-left:6px}
-.nav-btn{background:none;border:none;color:var(--text-muted);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;padding:6px 9px;border-radius:8px;transition:.2s;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.nav-btn:hover{color:var(--gold);background:var(--gold-glow)}
-.nav-btn.active{color:var(--gold);background:var(--gold-glow)}
-.signout-btn{margin-left:auto;background:none;border:1px solid rgba(192,57,43,0.4);border-radius:8px;color:#E74C3C;font-family:'DM Sans',sans-serif;font-size:12px;padding:5px 12px;cursor:pointer;transition:.2s;white-space:nowrap}
-.signout-btn:hover{background:rgba(192,57,43,0.1)}
+/* ══ APP SHELL ══ */
+#app{display:none;min-height:100vh;position:relative;z-index:1;}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(8,8,8,0.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;
+  padding:0 28px;min-height:68px;flex-wrap:wrap;}
+.topbar-logo{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);letter-spacing:.05em;margin-right:16px;white-space:nowrap;}
+.topbar-logo span{color:var(--text-muted);font-size:12px;font-family:'DM Sans',sans-serif;margin-left:8px;font-weight:400;}
+.nav-btn{background:none;border:none;color:var(--text-muted);font-size:13px;font-family:'DM Sans',sans-serif;
+  cursor:pointer;padding:8px 14px;border-radius:10px;transition:.2s;display:flex;align-items:center;gap:6px;white-space:nowrap;font-weight:500;}
+.nav-btn:hover{color:var(--gold);background:var(--gold-glow);}
+.nav-btn.active{color:var(--gold);background:var(--gold-glow);}
+.signout-btn{margin-left:auto;background:none;border:1.5px solid rgba(231,76,60,0.35);border-radius:10px;
+  color:var(--red);font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 16px;cursor:pointer;transition:.2s;white-space:nowrap;font-weight:500;}
+.signout-btn:hover{background:rgba(231,76,60,0.1);border-color:var(--red);}
 
-/* ── PAGES ── */
-.page{display:none;padding:28px 24px;max-width:1200px;margin:0 auto}
-.page.active{display:block}
-.page-title{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);margin-bottom:6px}
-.page-sub{font-size:13px;color:var(--text-muted);margin-bottom:28px}
+/* ══ PAGES ══ */
+.page{display:none;padding:36px 32px;max-width:1280px;margin:0 auto;}
+.page.active{display:block;}
+.page-title{font-family:'Cinzel',serif;font-size:26px;color:var(--gold);margin-bottom:8px;letter-spacing:.03em;}
+.page-sub{font-size:15px;color:var(--text-muted);margin-bottom:32px;}
 
-/* ── CARDS ── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:16px}
-.card-title{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);margin-bottom:14px;letter-spacing:.06em}
-.divider{height:1px;background:var(--border);margin:14px 0}
+/* ══ CARDS ══ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 28px;margin-bottom:18px;box-shadow:var(--shadow);}
+.card-title{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);margin-bottom:18px;letter-spacing:.08em;}
+.divider{height:1px;background:var(--border);margin:18px 0;}
 
-/* ── BADGES ── */
-.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:var(--gold-glow);color:var(--gold);border:1px solid var(--border)}
-.badge-green{background:rgba(39,174,96,0.15);color:#2ECC71;border-color:rgba(39,174,96,0.3)}
-.badge-red{background:rgba(192,57,43,0.15);color:#E74C3C;border-color:rgba(192,57,43,0.3)}
+/* ══ BADGES ══ */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;background:var(--gold-glow);color:var(--gold);border:1px solid var(--border);}
+.badge-green{background:rgba(39,174,96,0.12);color:var(--green);border-color:rgba(39,174,96,0.25);}
+.badge-red{background:rgba(231,76,60,0.12);color:var(--red);border-color:rgba(231,76,60,0.25);}
+.badge-blue{background:rgba(52,152,219,0.12);color:#5DADE2;border-color:rgba(52,152,219,0.25);}
 
-/* ── INPUTS ── */
-input[type=text],input[type=number],input[type=time],input[type=date],input[type=password],select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;transition:.2s;width:100%}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 10px var(--gold-glow)}
-select option{background:var(--surface2)}
-label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
-.form-row{margin-bottom:14px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+/* ══ INPUTS ══ */
+input[type=text],input[type=number],input[type=time],input[type=date],input[type=password],select,textarea{
+  background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius);
+  color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;padding:12px 16px;transition:.2s;width:100%;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 12px var(--gold-glow);}
+select option{background:var(--surface2);}
+label{font-size:14px;color:var(--text-muted);display:block;margin-bottom:8px;font-weight:500;}
+.form-row{margin-bottom:18px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
 
-/* ── BUTTONS ── */
-.btn{background:none;border:1px solid var(--border);border-radius:var(--radius);color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 18px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{border-color:var(--gold);color:var(--gold)}
-.btn-primary{background:linear-gradient(135deg,var(--gold-dim),var(--gold));border:none;color:var(--black);font-weight:500}
-.btn-primary:hover{filter:brightness(1.1);color:var(--black)}
-.btn-danger{border-color:rgba(192,57,43,0.4);color:#E74C3C}
-.btn-danger:hover{background:rgba(192,57,43,0.1);border-color:#E74C3C;color:#E74C3C}
-.btn-sm{padding:5px 12px;font-size:12px}
+/* ══ BUTTONS ══ */
+.btn{background:none;border:1.5px solid var(--border);border-radius:var(--radius);color:var(--text-muted);
+  font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 20px;cursor:pointer;transition:.2s;
+  display:inline-flex;align-items:center;gap:8px;font-weight:500;}
+.btn:hover{border-color:var(--gold);color:var(--gold);}
+.btn-primary{background:linear-gradient(135deg,var(--gold-dim),var(--gold));border:none;color:var(--black);font-weight:600;box-shadow:0 2px 12px rgba(212,175,55,0.25);}
+.btn-primary:hover{filter:brightness(1.1);color:var(--black);box-shadow:0 4px 20px rgba(212,175,55,0.4);}
+.btn-danger{border-color:rgba(231,76,60,0.35);color:var(--red);}
+.btn-danger:hover{background:rgba(231,76,60,0.1);border-color:var(--red);color:var(--red);}
+.btn-sm{padding:6px 14px;font-size:12px;}
 
-/* ── CHECK ITEMS ── */
-.check-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:8px;background:var(--surface2);transition:.2s}
-.check-item:hover{border-color:var(--border-bright)}
-.check-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--gold);cursor:pointer;flex-shrink:0}
-.check-item.done{opacity:.5}
-.check-item.done .hw-desc{text-decoration:line-through}
-.check-item .hw-desc{font-size:14px;flex:1}
-.check-item .due{font-size:11px;color:var(--text-muted);white-space:nowrap}
+/* ══ CHECK ITEMS ══ */
+.check-item{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:var(--radius);
+  border:1px solid var(--border);margin-bottom:10px;background:var(--surface2);transition:.2s;}
+.check-item:hover{border-color:var(--border-bright);}
+.check-item input[type=checkbox]{width:20px;height:20px;accent-color:var(--gold);cursor:pointer;flex-shrink:0;}
+.check-item.done{opacity:.5;}
+.check-item.done .hw-desc{text-decoration:line-through;}
+.check-item .hw-desc{font-size:15px;flex:1;}
+.check-item .due{font-size:12px;color:var(--text-muted);white-space:nowrap;}
 
-/* ── NOTICES ── */
-.notice{border-left:3px solid var(--gold);padding:14px 18px;background:var(--surface2);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
-.notice-content{flex:1}
-.notice-title{font-size:14px;font-weight:500;color:var(--gold);margin-bottom:4px}
-.notice-body{font-size:13px;color:var(--text-muted);line-height:1.6}
-.notice-date{font-size:11px;color:var(--text-dim);margin-top:6px}
+/* ══ NOTICES ══ */
+.notice{border-left:4px solid var(--gold);padding:18px 22px;background:var(--surface2);
+  border-radius:0 var(--radius) var(--radius) 0;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+.notice-content{flex:1;}
+.notice-title{font-size:15px;font-weight:600;color:var(--gold);margin-bottom:6px;}
+.notice-body{font-size:14px;color:var(--text-muted);line-height:1.65;}
+.notice-date{font-size:12px;color:var(--text-dim);margin-top:8px;}
 
-/* ── SUBJECTS ── */
-.subject-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:14px;overflow:hidden}
-.subject-header{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--surface);border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
-.subject-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.subject-name{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);flex:1}
-.subject-body{padding:16px 20px;display:none}
-.subject-body.open{display:block}
-.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:14px}
-.topic-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px}
-.topic-item input[type=checkbox]{accent-color:var(--gold);flex-shrink:0}
-.topic-item.done span{text-decoration:line-through;color:var(--text-dim)}
-.progress-bar{height:4px;background:var(--surface3);border-radius:2px;overflow:hidden;margin-bottom:14px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:.4s}
+/* ══ SUBJECTS ══ */
+.subject-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow);}
+.subject-header{display:flex;align-items:center;gap:14px;padding:18px 24px;background:var(--surface);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;transition:.2s;}
+.subject-header:hover{background:var(--surface2);}
+.subject-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor;}
+.subject-name{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);flex:1;}
+.subject-body{padding:24px 26px;display:none;}
+.subject-body.open{display:block;}
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:18px;}
 
-/* ── SCHEDULER ── */
-.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:20px}
-.day-col{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.day-header{background:var(--surface);padding:10px;text-align:center;font-family:'Cinzel',serif;font-size:11px;color:var(--gold);border-bottom:1px solid var(--border)}
-.day-header.today{background:var(--gold-glow);color:var(--gold-light)}
-.day-blocks{padding:6px;min-height:100px}
-.sched-block{border-radius:6px;padding:6px 8px;margin-bottom:5px;font-size:11px;border-left:3px solid var(--gold);background:var(--surface);display:flex;flex-direction:column;gap:2px}
-.sched-block.break-block{border-left-color:#4ECDC4}
-.sched-block.brain-block{border-left-color:#F7971E}
-.sched-block.free-block{border-left-color:#9B59B6}
-.sched-block .sb-time{font-size:10px;color:var(--text-muted)}
-.sched-block .sb-name{font-weight:500;color:var(--text);font-size:12px}
-.sb-timer-btn{font-size:10px;background:var(--gold-glow);border:none;border-radius:4px;color:var(--gold);padding:2px 6px;cursor:pointer;margin-top:3px;align-self:flex-start;transition:.2s}
-.sb-timer-btn:hover{background:rgba(212,175,55,0.35)}
-.sb-del-btn{font-size:10px;background:rgba(192,57,43,0.12);border:none;border-radius:4px;color:#E74C3C;padding:2px 6px;cursor:pointer;margin-top:2px;align-self:flex-start}
+/* ══ TOPIC ITEM ══ */
+.topic-item{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:0;overflow:hidden;transition:.25s;}
+.topic-item:hover{border-color:var(--border-bright);}
+.topic-item.done{border-color:rgba(39,174,96,0.3);background:rgba(39,174,96,0.04);}
+.topic-top{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.topic-top input[type=checkbox]{width:18px;height:18px;accent-color:var(--gold);cursor:pointer;flex-shrink:0;}
+.topic-top span{font-size:14px;flex:1;line-height:1.4;}
+.topic-item.done .topic-top span{text-decoration:line-through;color:var(--text-dim);}
+/* difficulty stars row */
+.topic-diff{display:none;padding:8px 14px 12px;border-top:1px solid var(--border);background:var(--surface2);}
+.topic-item.done .topic-diff{display:flex;align-items:center;gap:8px;}
+.diff-label{font-size:11px;color:var(--text-muted);white-space:nowrap;}
+.diff-stars{display:flex;gap:4px;}
+.diff-star{background:none;border:none;font-size:18px;cursor:pointer;padding:0;line-height:1;transition:.15s;filter:grayscale(1);opacity:.4;}
+.diff-star.active{filter:none;opacity:1;}
+.diff-star:hover{transform:scale(1.2);}
+.diff-tag{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:4px;}
+.diff-easy{background:rgba(39,174,96,0.15);color:var(--green);}
+.diff-medium{background:rgba(247,151,30,0.15);color:var(--orange);}
+.diff-hard{background:rgba(231,76,60,0.15);color:var(--red);}
 
-/* ── TIMER OVERLAY ── */
-#timer-overlay{position:fixed;inset:0;z-index:200;display:none;background:rgba(0,0,0,0.9);backdrop-filter:blur(8px);align-items:center;justify-content:center}
-#timer-overlay.show{display:flex}
-.timer-box{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-lg);padding:48px;text-align:center;min-width:320px;box-shadow:0 0 80px rgba(212,175,55,0.2)}
-.timer-subject{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);margin-bottom:6px}
-.timer-display{font-family:'Cinzel',serif;font-size:72px;color:var(--gold-light);letter-spacing:.05em;line-height:1;margin:18px 0}
-.timer-display.urgent{color:#E74C3C;animation:pulse-red 1s infinite}
-@keyframes pulse-red{0%,100%{opacity:1}50%{opacity:.4}}
-.timer-controls{display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+/* progress bar */
+.progress-wrap{margin-bottom:18px;}
+.progress-bar{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:3px;transition:.5s;}
+.progress-label{font-size:12px;color:var(--text-muted);margin-top:6px;display:flex;justify-content:space-between;}
 
-/* ── TOASTS ── */
-#toast-container{position:fixed;right:20px;bottom:20px;z-index:300;display:flex;flex-direction:column;gap:10px;align-items:flex-end;pointer-events:none}
-.toast{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius);padding:14px 18px;max-width:280px;box-shadow:0 4px 24px rgba(0,0,0,0.6);animation:slide-in .3s ease;display:flex;gap:12px;align-items:flex-start;pointer-events:all}
-@keyframes slide-in{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
-.toast-icon{font-size:20px;flex-shrink:0}
-.toast-title{font-size:13px;font-weight:500;color:var(--gold);margin-bottom:3px}
-.toast-msg{font-size:12px;color:var(--text-muted);line-height:1.4}
+/* difficulty summary bar */
+.diff-summary{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);}
+.diff-summary-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-muted);}
+.diff-summary-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 
-/* ── CONFETTI ── */
-#confetti-canvas{position:fixed;inset:0;z-index:250;pointer-events:none;display:none}
+/* ══ SCHEDULER ══ */
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:20px;}
+.day-col{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.day-header{background:var(--surface);padding:12px 8px;text-align:center;font-family:'Cinzel',serif;font-size:12px;color:var(--gold);border-bottom:1px solid var(--border);}
+.day-header.today{background:var(--gold-glow);color:var(--gold-light);}
+.day-blocks{padding:8px;min-height:120px;}
+.sched-block{border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:12px;border-left:4px solid var(--gold);background:var(--surface);display:flex;flex-direction:column;gap:3px;transition:.2s;}
+.sched-block.break-block{border-left-color:var(--teal);}
+.sched-block.brain-block{border-left-color:var(--orange);}
+.sched-block.free-block{border-left-color:var(--purple);}
+.sched-block .sb-time{font-size:11px;color:var(--text-muted);}
+.sched-block .sb-name{font-weight:600;color:var(--text);font-size:13px;}
+.sb-timer-btn{font-size:11px;background:var(--gold-glow);border:none;border-radius:6px;color:var(--gold);padding:3px 8px;cursor:pointer;margin-top:4px;align-self:flex-start;transition:.2s;font-family:'DM Sans',sans-serif;font-weight:500;}
+.sb-timer-btn:hover{background:rgba(212,175,55,0.3);}
+.sb-del-btn{font-size:11px;background:rgba(231,76,60,0.1);border:none;border-radius:6px;color:var(--red);padding:3px 8px;cursor:pointer;margin-top:2px;align-self:flex-start;font-family:'DM Sans',sans-serif;}
 
-/* ── TEACHER TABS ── */
-.tabs{display:flex;gap:2px;margin-bottom:20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.tab{background:none;border:none;padding:10px 14px;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;transition:.2s;margin-bottom:-1px}
-.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.teacher-section{display:none}
-.teacher-section.active-tab{display:block}
+/* ══ TIMER OVERLAY ══ */
+#timer-overlay{position:fixed;inset:0;z-index:300;display:none;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);align-items:center;justify-content:center;}
+#timer-overlay.show{display:flex;}
+.timer-box{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xl);padding:56px 48px;text-align:center;min-width:360px;box-shadow:0 0 100px rgba(212,175,55,0.15),var(--shadow);}
+.timer-subject{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);margin-bottom:8px;letter-spacing:.04em;}
+.timer-display{font-family:'Cinzel',serif;font-size:88px;color:var(--gold-light);letter-spacing:.04em;line-height:1;margin:24px 0;text-shadow:0 0 40px rgba(212,175,55,0.3);}
+.timer-display.urgent{color:var(--red);animation:pulse-red 1s infinite;text-shadow:0 0 40px rgba(231,76,60,0.4);}
+@keyframes pulse-red{0%,100%{opacity:1;}50%{opacity:.4;}}
+.timer-controls{display:flex;gap:14px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
+.timer-label{font-size:14px;color:var(--text-muted);margin-bottom:4px;}
 
-/* ── DASHBOARD STATS ── */
-.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
-.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;display:flex;align-items:center;gap:14px}
-.stat-icon{font-size:26px}
-.stat-label{font-size:12px;color:var(--text-muted);margin-bottom:4px}
-.stat-value{font-family:'Cinzel',serif;font-size:20px;color:var(--gold)}
+/* ══ TOASTS ══ */
+#toast-container{position:fixed;right:24px;bottom:24px;z-index:400;display:flex;flex-direction:column;gap:12px;align-items:flex-end;pointer-events:none;}
+.toast{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius);padding:16px 20px;max-width:300px;box-shadow:0 8px 32px rgba(0,0,0,0.6);animation:slide-in .3s ease;display:flex;gap:14px;align-items:flex-start;pointer-events:all;}
+@keyframes slide-in{from{transform:translateX(120%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.toast-icon{font-size:22px;flex-shrink:0;}
+.toast-title{font-size:14px;font-weight:600;color:var(--gold);margin-bottom:3px;}
+.toast-msg{font-size:13px;color:var(--text-muted);line-height:1.4;}
 
-/* ── MODAL ── */
-#modal-overlay{display:none;position:fixed;inset:0;z-index:180;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);align-items:center;justify-content:center}
-#modal-overlay.show{display:flex}
-#modal-box{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-lg);padding:28px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto}
+/* ══ CONFETTI ══ */
+#confetti-canvas{position:fixed;inset:0;z-index:350;pointer-events:none;display:none;}
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){.week-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:600px){
-  .week-grid{grid-template-columns:repeat(2,1fr)}
-  .form-grid{grid-template-columns:1fr}
-  .page{padding:16px 12px}
-  .timer-display{font-size:52px}
-  .timer-box{padding:32px 20px;min-width:unset;width:90%}
-  .dash-grid{grid-template-columns:1fr 1fr}
-  #page-dashboard > div[style]{grid-template-columns:1fr!important}
+/* ══ TEACHER TABS ══ */
+.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.tab{background:none;border:none;padding:12px 18px;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;border-bottom:2px solid transparent;transition:.2s;margin-bottom:-1px;font-weight:500;}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.teacher-section{display:none;}
+.teacher-section.active-tab{display:block;}
+
+/* ══ DASHBOARD ══ */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:28px;}
+.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px;display:flex;align-items:center;gap:18px;transition:.2s;box-shadow:var(--shadow);}
+.stat-card:hover{border-color:var(--border-bright);}
+.stat-icon{font-size:32px;}
+.stat-label{font-size:13px;color:var(--text-muted);margin-bottom:6px;font-weight:500;}
+.stat-value{font-family:'Cinzel',serif;font-size:26px;color:var(--gold);}
+
+/* ══ MODAL ══ */
+#modal-overlay{display:none;position:fixed;inset:0;z-index:250;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;}
+#modal-overlay.show{display:flex;}
+#modal-box{background:var(--surface);border:1px solid var(--border-bright);border-radius:var(--radius-xl);padding:34px;width:92%;max-width:500px;max-height:92vh;overflow-y:auto;box-shadow:var(--shadow);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1000px){.week-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:680px){
+  .week-grid{grid-template-columns:repeat(2,1fr);}
+  .form-grid{grid-template-columns:1fr;}
+  .page{padding:20px 16px;}
+  .timer-display{font-size:64px;}
+  .timer-box{padding:36px 24px;min-width:unset;width:92%;}
+  .dash-grid{grid-template-columns:1fr 1fr;}
+  #page-dashboard .two-col{grid-template-columns:1fr!important;}
+  .login-box{width:92%;padding:40px 28px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN ══ -->
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-crown">👑</div>
@@ -191,15 +246,15 @@ label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
   </div>
 </div>
 
-<!-- ══ CONFETTI ══ -->
+<!-- CONFETTI -->
 <canvas id="confetti-canvas"></canvas>
 
-<!-- ══ TIMER OVERLAY ══ -->
+<!-- TIMER OVERLAY -->
 <div id="timer-overlay">
   <div class="timer-box">
     <div class="timer-subject" id="timer-subject">Session</div>
     <div class="timer-display" id="timer-display">00:00</div>
-    <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px" id="timer-label">Focus session</div>
+    <div class="timer-label" id="timer-label">Focus session</div>
     <div class="timer-controls">
       <button class="btn btn-primary" id="timer-toggle-btn" onclick="toggleTimer()">▶ Start</button>
       <button class="btn" onclick="resetTimer()">↺ Reset</button>
@@ -208,15 +263,15 @@ label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
   </div>
 </div>
 
-<!-- ══ TOASTS ══ -->
+<!-- TOASTS -->
 <div id="toast-container"></div>
 
-<!-- ══ MODAL ══ -->
+<!-- MODAL -->
 <div id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div id="modal-box"><div id="modal-content"></div></div>
 </div>
 
-<!-- ══ APP ══ -->
+<!-- APP -->
 <div id="app">
   <div class="topbar">
     <div class="topbar-logo">Scholar<span id="topbar-name"></span></div>
@@ -234,26 +289,26 @@ label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
     <div class="page-title">Welcome back 👋</div>
     <div class="page-sub" id="dash-date"></div>
     <div class="dash-grid" id="dash-stats"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
       <div class="card"><div class="card-title">📝 PENDING HOMEWORK</div><div id="dash-hw"></div></div>
       <div class="card"><div class="card-title">📢 LATEST NOTICE</div><div id="dash-notice"></div></div>
     </div>
-    <div class="card" style="margin-top:16px"><div class="card-title">📅 TODAY'S SCHEDULE</div><div id="dash-schedule"></div></div>
+    <div class="card" style="margin-top:18px;"><div class="card-title">📅 TODAY'S SCHEDULE</div><div id="dash-schedule"></div></div>
   </div>
 
   <!-- SUBJECTS -->
   <div class="page" id="page-subjects">
     <div class="page-title">Subjects & Topics</div>
-    <div class="page-sub">Track curriculum progress per subject</div>
+    <div class="page-sub">Track curriculum progress — tick topics as you complete them and rate their difficulty</div>
     <div id="subjects-list"></div>
-    <p id="no-subjects" style="color:var(--text-muted);font-size:14px;display:none">No subjects yet. Add them in the Teacher panel → Subjects tab.</p>
+    <p id="no-subjects" style="color:var(--text-muted);font-size:15px;display:none;">No subjects yet. Teacher can add them in the Teacher panel → Subjects tab.</p>
   </div>
 
   <!-- HOMEWORK -->
   <div class="page" id="page-homework">
     <div class="page-title">Homework</div>
     <div class="page-sub">All assigned tasks</div>
-    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap" id="hw-filter-bar"></div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;" id="hw-filter-bar"></div>
     <div id="homework-list"></div>
   </div>
 
@@ -261,13 +316,13 @@ label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
   <div class="page" id="page-scheduler">
     <div class="page-title">Weekly Schedule</div>
     <div class="page-sub">Plan the week with timed blocks</div>
-    <div style="display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:24px;flex-wrap:wrap;">
       <button class="btn" onclick="prevWeek()">← Prev</button>
-      <span id="week-label" style="font-family:'Cinzel',serif;color:var(--gold);font-size:13px;min-width:180px;text-align:center"></span>
+      <span id="week-label" style="font-family:'Cinzel',serif;color:var(--gold);font-size:14px;min-width:200px;text-align:center;"></span>
       <button class="btn" onclick="nextWeek()">Next →</button>
-      <button class="btn btn-primary" id="add-block-btn" onclick="openAddBlockModal()" style="display:none">+ Add Block</button>
-      <div id="repeat-controls" style="display:none;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <select id="repeat-weeks" style="width:auto;padding:9px 12px">
+      <button class="btn btn-primary" id="add-block-btn" onclick="openAddBlockModal()" style="display:none;">+ Add Block</button>
+      <div id="repeat-controls" style="display:none;gap:10px;align-items:center;flex-wrap:wrap;">
+        <select id="repeat-weeks" style="width:auto;padding:10px 14px;">
           <option value="1">Repeat 1 week</option>
           <option value="2">Repeat 2 weeks</option>
           <option value="3">Repeat 3 weeks</option>
@@ -277,11 +332,11 @@ label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
       </div>
     </div>
     <div class="week-grid" id="week-grid"></div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
-      <span style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:var(--gold);display:inline-block"></span>Lesson</span>
-      <span style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#4ECDC4;display:inline-block"></span>Break</span>
-      <span style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#F7971E;display:inline-block"></span>Brain break</span>
-      <span style="font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#9B59B6;display:inline-block"></span>Free time</span>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;">
+      <span style="font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--gold);display:inline-block;"></span>Lesson</span>
+      <span style="font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--teal);display:inline-block;"></span>Break</span>
+      <span style="font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--orange);display:inline-block;"></span>Brain break</span>
+      <span style="font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:3px;background:var(--purple);display:inline-block;"></span>Free time</span>
     </div>
   </div>
 
@@ -305,16 +360,15 @@ label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
       <button class="tab" onclick="switchTab('settings',this)">Settings</button>
     </div>
 
-    <!-- STUDENTS TAB -->
     <div id="tab-students" class="teacher-section active-tab">
       <div class="card">
         <div class="card-title">CREATE STUDENT ACCOUNT</div>
         <div class="form-grid">
           <div class="form-row"><label>Student name</label><input type="text" id="new-student-name" placeholder="e.g. Mika"/></div>
           <div class="form-row"><label>Access code</label>
-            <div style="display:flex;gap:8px">
+            <div style="display:flex;gap:10px;">
               <input type="text" id="new-student-code" placeholder="e.g. STU-4829"/>
-              <button class="btn btn-sm" onclick="genCode()" title="Generate random code" style="flex-shrink:0">🎲</button>
+              <button class="btn btn-sm" onclick="genCode()" title="Generate random code" style="flex-shrink:0;">🎲</button>
             </div>
           </div>
         </div>
@@ -323,83 +377,80 @@ label{font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px}
       <div id="students-table"></div>
     </div>
 
-    <!-- ASSIGN HW TAB -->
     <div id="tab-assign-hw" class="teacher-section">
       <div class="card">
         <div class="card-title">ASSIGN HOMEWORK</div>
         <div class="form-row"><label>Student</label><select id="hw-student-sel" onchange="loadSubjectsForHw()"></select></div>
         <div class="form-row"><label>Subject</label><select id="hw-subject-sel"></select></div>
-        <div class="form-row"><label>Task description</label><textarea id="hw-desc" rows="3" style="resize:vertical" placeholder="Describe the homework task…"></textarea></div>
-        <div class="form-row"><label>Due date (optional)</label><input type="date" id="hw-due" style="width:auto"/></div>
+        <div class="form-row"><label>Task description</label><textarea id="hw-desc" rows="3" style="resize:vertical;" placeholder="Describe the homework task…"></textarea></div>
+        <div class="form-row"><label>Due date (optional)</label><input type="date" id="hw-due" style="width:auto;"/></div>
         <button class="btn btn-primary" onclick="assignHomework()">Assign Homework</button>
       </div>
     </div>
 
-    <!-- POST NOTICE TAB -->
     <div id="tab-post-notice" class="teacher-section">
       <div class="card">
         <div class="card-title">POST ANNOUNCEMENT</div>
         <div class="form-row"><label>Title</label><input type="text" id="notice-title-in" placeholder="e.g. No class on Friday"/></div>
-        <div class="form-row"><label>Message</label><textarea id="notice-body-in" rows="4" style="resize:vertical" placeholder="Type your announcement here…"></textarea></div>
+        <div class="form-row"><label>Message</label><textarea id="notice-body-in" rows="4" style="resize:vertical;" placeholder="Type your announcement here…"></textarea></div>
         <button class="btn btn-primary" onclick="postNotice()">Post Notice</button>
       </div>
     </div>
 
-    <!-- REMINDERS TAB -->
     <div id="tab-reminders" class="teacher-section">
       <div class="card">
         <div class="card-title">REMINDER SETTINGS</div>
-        <div style="display:flex;flex-direction:column;gap:18px">
-          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-            <label style="min-width:230px;color:var(--text);margin:0;font-size:14px">🧠 Brain break every (minutes)</label>
-            <input type="number" id="brain-interval" value="45" min="5" max="180" style="width:80px"/>
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+            <label style="min-width:260px;color:var(--text);margin:0;font-size:15px;">🧠 Brain break every (minutes)</label>
+            <input type="number" id="brain-interval" value="45" min="5" max="180" style="width:90px;"/>
           </div>
-          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-            <label style="min-width:230px;color:var(--text);margin:0;font-size:14px">👓 Blue light glasses reminder every (minutes)</label>
-            <input type="number" id="blue-interval" value="60" min="5" max="240" style="width:80px"/>
+          <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+            <label style="min-width:260px;color:var(--text);margin:0;font-size:15px;">👓 Blue light glasses reminder every (minutes)</label>
+            <input type="number" id="blue-interval" value="60" min="5" max="240" style="width:90px;"/>
           </div>
-          <div style="display:flex;align-items:center;gap:16px">
-            <label style="min-width:230px;color:var(--text);margin:0;font-size:14px">🔔 Enable all reminders</label>
-            <input type="checkbox" id="reminders-on" style="width:20px;height:20px;accent-color:var(--gold)" checked/>
+          <div style="display:flex;align-items:center;gap:20px;">
+            <label style="min-width:260px;color:var(--text);margin:0;font-size:15px;">🔔 Enable all reminders</label>
+            <input type="checkbox" id="reminders-on" style="width:22px;height:22px;accent-color:var(--gold);" checked/>
           </div>
         </div>
-        <button class="btn btn-primary" style="margin-top:22px" onclick="saveReminders()">Save Settings</button>
+        <button class="btn btn-primary" style="margin-top:24px;" onclick="saveReminders()">Save Settings</button>
       </div>
     </div>
 
-    <!-- SUBJECTS TAB -->
     <div id="tab-subject-mgr" class="teacher-section">
       <div class="card">
         <div class="card-title">ADD SUBJECT</div>
         <div class="form-row"><label>Student</label><select id="subj-student-sel" onchange="loadSubjMgrList()"></select></div>
         <div class="form-grid">
           <div class="form-row"><label>Subject name</label><input type="text" id="new-subj-name" placeholder="e.g. Mathematics"/></div>
-          <div class="form-row"><label>Colour</label><input type="color" id="new-subj-color" value="#D4AF37" style="width:60px;height:38px;padding:2px;background:none;border-radius:8px"/></div>
+          <div class="form-row"><label>Colour</label><input type="color" id="new-subj-color" value="#D4AF37" style="width:64px;height:42px;padding:2px;background:none;border-radius:8px;cursor:pointer;"/></div>
         </div>
         <button class="btn btn-primary" onclick="addSubject()">Add Subject</button>
       </div>
-      <div id="subj-mgr-list" style="margin-top:12px"></div>
+      <div id="subj-mgr-list" style="margin-top:14px;"></div>
     </div>
 
-    <!-- SETTINGS TAB -->
     <div id="tab-settings" class="teacher-section">
       <div class="card">
         <div class="card-title">CHANGE TEACHER CODE</div>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Change the code you use to log in as teacher. Keep it safe!</p>
+        <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">Change the code you use to log in as teacher. Keep it safe!</p>
         <div class="form-row"><label>Current teacher code</label><input type="text" id="current-teacher-code" placeholder="Your current code"/></div>
-        <div class="form-row"><label>New teacher code</label><input type="text" id="new-teacher-code" placeholder="e.g. TEACHER-2025"/></div>
+        <div class="form-row"><label>New teacher code</label><input type="text" id="new-teacher-code" placeholder="e.g. TEACH-2025"/></div>
         <button class="btn btn-primary" onclick="changeTeacherCode()">Update Code</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- FIREBASE SDK — must be before app script -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-// ════════════════════════════════════════
+window.onload = function() {
+// ══════════════════════════════════════════
 // 🔥 FIREBASE CONFIG
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 const firebaseConfig = {
   apiKey: "AIzaSyC-STu7JkNdXJ0_tNn5ZR0_v1fx84Yfeqs",
   authDomain: "mika--school.firebaseapp.com",
@@ -412,9 +463,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // STATE
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 let currentUser = null;
 let hwFilter = 'all';
 let appData = {
@@ -423,48 +474,36 @@ let appData = {
 };
 let timerInterval=null, timerRunning=false, timerSeconds=0, timerOrigSeconds=0, timerSubjectName='';
 let reminderTimers=[];
-let currentWeekStart = getMonday(new Date());
+let currentWeekStart = null; // set after getMonday is defined below
 
-// ════════════════════════════════════════
-// AUDIO
-// ════════════════════════════════════════
-let audioCtx;
-function getAudio(){
-  if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-  return audioCtx;
+// ══════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function escAttr(s){return String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function getMonday(d){
+  const dt=new Date(d),day=dt.getDay(),diff=dt.getDate()-day+(day===0?-6:1);
+  dt.setDate(diff);dt.setHours(0,0,0,0);return dt;
 }
-function playTone(freq,type,dur,vol){
-  try{
-    const ctx=getAudio(),osc=ctx.createOscillator(),gain=ctx.createGain();
-    osc.connect(gain);gain.connect(ctx.destination);
-    osc.type=type||'sine';osc.frequency.value=freq||440;
-    gain.gain.setValueAtTime(vol||0.4,ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+(dur||0.4));
-    osc.start();osc.stop(ctx.currentTime+(dur||0.4));
-  }catch(e){}
+function blockClass(t){
+  return t==='break'?'break-block':t==='brain'?'brain-block':t==='free'?'free-block':'';
 }
-function playClick(){playTone(600,'square',0.08,0.2);}
-function playSuccess(){playTone(880,'sine',0.25,0.35);setTimeout(()=>playTone(1100,'sine',0.2,0.3),150);}
-function playCelebration(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>playTone(f,'triangle',0.3,0.5),i*130));}
-function playReminder(){[440,550,440].forEach((f,i)=>setTimeout(()=>playTone(f,'sine',0.25,0.35),i*200));}
-function playError(){playTone(200,'sawtooth',0.3,0.3);}
 
-// ════════════════════════════════════════
+// Now safe to initialize
+currentWeekStart = getMonday(new Date());
+
+// ══════════════════════════════════════════
 // LOGIN
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 async function attemptLogin(){
   const code=document.getElementById('code-input').value.trim().toUpperCase();
   if(!code)return;
-  playClick();
   document.getElementById('login-error').style.display='none';
   document.getElementById('login-loading').style.display='block';
   try{
     const settingsDoc=await db.collection('settings').doc('teacher').get();
     const teacherCode=settingsDoc.exists?settingsDoc.data().teacherCode:'TEACHER-001';
-    if(code===teacherCode){
-      currentUser={id:'teacher',name:'Teacher',code,role:'teacher'};
-      loginSuccess();return;
-    }
+    if(code===teacherCode){currentUser={id:'teacher',name:'Teacher',code,role:'teacher'};loginSuccess();return;}
     const snap=await db.collection('students').where('code','==',code).get();
     if(!snap.empty){
       const d=snap.docs[0];
@@ -474,11 +513,10 @@ async function attemptLogin(){
       document.getElementById('login-loading').style.display='none';
       document.getElementById('login-error').textContent='Invalid code. Please try again.';
       document.getElementById('login-error').style.display='block';
-      playError();
     }
   }catch(err){
     document.getElementById('login-loading').style.display='none';
-    document.getElementById('login-error').textContent='Connection error. Check your Firebase config.';
+    document.getElementById('login-error').textContent='Connection error. Check your internet connection.';
     document.getElementById('login-error').style.display='block';
     console.error(err);
   }
@@ -494,7 +532,6 @@ function loginSuccess(){
     document.getElementById('add-block-btn').style.display='flex';
     document.getElementById('repeat-controls').style.display='flex';
   }
-  playSuccess();
   updateDashDate();
   loadAllData();
 }
@@ -509,16 +546,14 @@ function logout(){
   document.getElementById('teacher-nav-btn').style.display='none';
   document.getElementById('add-block-btn').style.display='none';
   document.getElementById('repeat-controls').style.display='none';
-  playClick();
 }
 
-// ════════════════════════════════════════
-// DATA LOADING
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
 async function loadAllData(){
   try{
-    // Load notices separately to handle missing index gracefully
-    const [studSnap,subjSnap,hwSnap,schedSnap,remDoc] = await Promise.all([
+    const [studSnap,subjSnap,hwSnap,schedSnap,remDoc]=await Promise.all([
       db.collection('students').get(),
       db.collection('subjects').get(),
       db.collection('homework').get(),
@@ -530,8 +565,6 @@ async function loadAllData(){
     appData.homework=hwSnap.docs.map(d=>({id:d.id,...d.data()}));
     appData.schedule=schedSnap.docs.map(d=>({id:d.id,...d.data()}));
     if(remDoc.exists)appData.reminders=remDoc.data();
-
-    // Notices with fallback if index not built yet
     try{
       const notSnap=await db.collection('notices').orderBy('createdAt','desc').get();
       appData.notices=notSnap.docs.map(d=>({id:d.id,...d.data()}));
@@ -539,11 +572,8 @@ async function loadAllData(){
       const notSnap=await db.collection('notices').get();
       appData.notices=notSnap.docs.map(d=>({id:d.id,...d.data()}));
     }
-
-    // Ensure teacher doc exists on first run
     const teacherDoc=await db.collection('settings').doc('teacher').get();
     if(!teacherDoc.exists)await db.collection('settings').doc('teacher').set({teacherCode:'TEACHER-001'});
-
     renderAll();
     startReminders();
   }catch(err){
@@ -561,15 +591,14 @@ function renderAll(){
   if(currentUser&&currentUser.role==='teacher')renderTeacherPanel();
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // NAVIGATION
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function showPage(name,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
   if(btn)btn.classList.add('active');
-  playClick();
 }
 
 function switchTab(name,btn){
@@ -578,95 +607,119 @@ function switchTab(name,btn){
   document.getElementById('tab-'+name).classList.add('active-tab');
   btn.classList.add('active');
   if(name==='assign-hw'||name==='subject-mgr')populateTeacherSelects();
-  playClick();
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // DASHBOARD
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function updateDashDate(){
-  const now=new Date();
-  document.getElementById('dash-date').textContent=now.toLocaleDateString('en-ZA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('dash-date').textContent=new Date().toLocaleDateString('en-ZA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 }
 
 function renderDashboard(){
-  const isTeacher=currentUser&&currentUser.role==='teacher';
-  const hw=isTeacher?appData.homework:appData.homework.filter(h=>h.studentId===currentUser.id);
-  const subjs=isTeacher?appData.subjects:appData.subjects.filter(s=>s.studentId===currentUser.id);
+  const isT=currentUser&&currentUser.role==='teacher';
+  const hw=isT?appData.homework:appData.homework.filter(h=>h.studentId===currentUser.id);
+  const subjs=isT?appData.subjects:appData.subjects.filter(s=>s.studentId===currentUser.id);
   const pending=hw.filter(h=>!h.done).length;
   const topicsDone=subjs.reduce((a,s)=>a+(s.topics||[]).filter(t=>t.done).length,0);
   const topicsTotal=subjs.reduce((a,s)=>a+(s.topics||[]).length,0);
-
   document.getElementById('dash-stats').innerHTML=`
     <div class="stat-card"><div class="stat-icon">📝</div><div><div class="stat-label">Pending homework</div><div class="stat-value">${pending}</div></div></div>
     <div class="stat-card"><div class="stat-icon">📚</div><div><div class="stat-label">Subjects</div><div class="stat-value">${subjs.length}</div></div></div>
     <div class="stat-card"><div class="stat-icon">✅</div><div><div class="stat-label">Topics covered</div><div class="stat-value">${topicsDone}/${topicsTotal}</div></div></div>
     <div class="stat-card"><div class="stat-icon">📢</div><div><div class="stat-label">Notices</div><div class="stat-value">${appData.notices.length}</div></div></div>`;
-
   const pendingHw=hw.filter(h=>!h.done).slice(0,4);
   document.getElementById('dash-hw').innerHTML=pendingHw.length
-    ?pendingHw.map(h=>`<div class="check-item">
-      <div class="hw-desc"><strong>${escHtml(h.subject)}</strong> — ${escHtml(h.description)}</div>
-      <div class="due">${h.dueDate||''}</div></div>`).join('')
-    :'<p style="color:var(--text-muted);font-size:13px">All clear! 🎉</p>';
-
+    ?pendingHw.map(h=>`<div class="check-item"><div class="hw-desc"><strong>${escHtml(h.subject)}</strong> — ${escHtml(h.description)}</div><div class="due">${h.dueDate||''}</div></div>`).join('')
+    :'<p style="color:var(--text-muted);font-size:15px;">All clear! 🎉</p>';
   const n=appData.notices[0];
   document.getElementById('dash-notice').innerHTML=n
-    ?`<div class="notice"><div class="notice-content"><div class="notice-title">${escHtml(n.title)}</div><div class="notice-body">${escHtml(n.body)}</div></div></div>`
-    :'<p style="color:var(--text-muted);font-size:13px">No notices yet.</p>';
-
+    ?`<div class="notice" style="margin:0;"><div class="notice-content"><div class="notice-title">${escHtml(n.title)}</div><div class="notice-body">${escHtml(n.body)}</div></div></div>`
+    :'<p style="color:var(--text-muted);font-size:15px;">No notices yet.</p>';
   const todayStr=new Date().toLocaleDateString('en-CA');
   const todayBlocks=appData.schedule.filter(b=>b.date===todayStr).sort((a,b)=>a.startTime.localeCompare(b.startTime));
   document.getElementById('dash-schedule').innerHTML=todayBlocks.length
     ?todayBlocks.map(b=>`<div class="sched-block ${blockClass(b.type)}">
-      <div class="sb-time">${b.startTime} – ${b.endTime}</div>
-      <div class="sb-name">${escHtml(b.name)}</div>
-      ${b.durationMins?`<button class="sb-timer-btn" onclick="openTimer('${escAttr(b.name)}',${b.durationMins})">▶ ${b.durationMins}min timer</button>`:''}
-    </div>`).join('')
-    :'<p style="color:var(--text-muted);font-size:13px">No blocks scheduled for today.</p>';
+        <div class="sb-time">${b.startTime} – ${b.endTime}</div>
+        <div class="sb-name">${escHtml(b.name)}</div>
+        ${b.durationMins?`<button class="sb-timer-btn" onclick="openTimer('${escAttr(b.name)}',${b.durationMins})">▶ ${b.durationMins}min timer</button>`:''}
+      </div>`).join('')
+    :'<p style="color:var(--text-muted);font-size:15px;">No blocks scheduled for today.</p>';
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // SUBJECTS
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
+function diffLabel(d){
+  if(!d)return '';
+  if(d<=2)return '<span class="diff-tag diff-easy">Easy</span>';
+  if(d<=3)return '<span class="diff-tag diff-medium">Medium</span>';
+  return '<span class="diff-tag diff-hard">Hard</span>';
+}
+
 function renderSubjects(){
-  const isTeacher=currentUser&&currentUser.role==='teacher';
-  const list=isTeacher?appData.subjects:appData.subjects.filter(s=>s.studentId===currentUser.id);
+  const isT=currentUser&&currentUser.role==='teacher';
+  const list=isT?appData.subjects:appData.subjects.filter(s=>s.studentId===currentUser.id);
   document.getElementById('no-subjects').style.display=list.length?'none':'block';
   document.getElementById('subjects-list').innerHTML=list.map(s=>{
     const topics=s.topics||[];
     const done=topics.filter(t=>t.done).length;
     const pct=topics.length?Math.round(done/topics.length*100):0;
-    const studentName=isTeacher?(appData.students.find(st=>st.id===s.studentId)||{}).name||'':'' ;
+    const studentName=isT?(appData.students.find(st=>st.id===s.studentId)||{}).name||'':'';
+    // difficulty breakdown
+    const rated=topics.filter(t=>t.done&&t.difficulty);
+    const easy=rated.filter(t=>t.difficulty<=2).length;
+    const medium=rated.filter(t=>t.difficulty===3).length;
+    const hard=rated.filter(t=>t.difficulty>=4).length;
+    const diffSummary=rated.length?`<div class="diff-summary">
+      <div class="diff-summary-item"><div class="diff-summary-dot" style="background:var(--green)"></div>${easy} Easy</div>
+      <div class="diff-summary-item"><div class="diff-summary-dot" style="background:var(--orange)"></div>${medium} Medium</div>
+      <div class="diff-summary-item"><div class="diff-summary-dot" style="background:var(--red)"></div>${hard} Hard</div>
+      <div style="margin-left:auto;font-size:13px;color:var(--text-muted);">${rated.length}/${done} topics rated</div>
+    </div>`:'';
     return `<div class="subject-card">
       <div class="subject-header" onclick="toggleSubj('${s.id}')">
-        <div class="subject-dot" style="background:${s.color||'#D4AF37'}"></div>
-        <div class="subject-name">${escHtml(s.name)}${studentName?` <span style="font-size:11px;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-style:normal">(${escHtml(studentName)})</span>`:''}</div>
+        <div class="subject-dot" style="background:${s.color||'#D4AF37'};color:${s.color||'#D4AF37'};"></div>
+        <div class="subject-name">${escHtml(s.name)}${studentName?` <span style="font-size:12px;color:var(--text-muted);font-family:'DM Sans',sans-serif;">(${escHtml(studentName)})</span>`:''}</div>
         <div class="badge">${done}/${topics.length} topics</div>
-        <span style="font-size:12px;color:var(--text-muted);margin-left:8px">${pct}%</span>
-        <span style="color:var(--text-dim);margin-left:8px;font-size:16px">▾</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:10px;">${pct}%</span>
+        <span style="color:var(--text-dim);margin-left:10px;font-size:18px;">▾</span>
       </div>
       <div class="subject-body" id="subj-body-${s.id}">
-        <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-        <div class="topics-grid">${topics.map((t,i)=>`
-          <div class="topic-item ${t.done?'done':''}">
-            <input type="checkbox" ${t.done?'checked':''} onchange="toggleTopic('${s.id}',${i},this.checked)"/>
-            <span>${escHtml(t.name)}</span>
-          </div>`).join('')}
-          ${!topics.length?'<p style="color:var(--text-muted);font-size:13px;grid-column:1/-1">No topics yet.</p>':''}
+        <div class="progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <div class="progress-label"><span>${done} of ${topics.length} completed</span><span>${pct}%</span></div>
         </div>
-        ${isTeacher?`<div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap">
-          <input type="text" id="nt-${s.id}" placeholder="Add topic…" style="width:200px"/>
+        ${diffSummary}
+        <div class="topics-grid">${topics.map((t,i)=>`
+          <div class="topic-item ${t.done?'done':''}" id="topic-${s.id}-${i}">
+            <div class="topic-top">
+              <input type="checkbox" ${t.done?'checked':''} onchange="toggleTopic('${s.id}',${i},this.checked)"/>
+              <span>${escHtml(t.name)}</span>
+            </div>
+            <div class="topic-diff">
+              <span class="diff-label">Difficulty:</span>
+              <div class="diff-stars">
+                ${[1,2,3,4,5].map(star=>`<button class="diff-star ${(t.difficulty||0)>=star?'active':''}"
+                  onclick="setDifficulty('${s.id}',${i},${star})" title="${star} star${star>1?'s':''}">★</button>`).join('')}
+              </div>
+              ${diffLabel(t.difficulty)}
+            </div>
+          </div>`).join('')}
+          ${!topics.length?'<p style="color:var(--text-muted);font-size:14px;grid-column:1/-1;">No topics yet.</p>':''}
+        </div>
+        ${isT?`<div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;">
+          <input type="text" id="nt-${s.id}" placeholder="Add topic…" style="width:220px;"/>
           <button class="btn btn-sm btn-primary" onclick="addTopic('${s.id}')">+ Topic</button>
         </div>`:''}
         <div class="divider"></div>
-        <div class="card-title" style="font-size:11px;margin-bottom:8px">HOMEWORK</div>
-        ${appData.homework.filter(h=>h.subjectId===s.id&&(isTeacher||h.studentId===currentUser.id)).map(h=>`
+        <div class="card-title" style="font-size:11px;margin-bottom:10px;">HOMEWORK</div>
+        ${appData.homework.filter(h=>h.subjectId===s.id&&(isT||h.studentId===currentUser.id)).map(h=>`
           <div class="check-item ${h.done?'done':''}">
             <input type="checkbox" ${h.done?'checked':''} onchange="markHwDone('${h.id}',this.checked)"/>
             <div class="hw-desc">${escHtml(h.description)}</div>
             <div class="due">${h.dueDate||''}</div>
-          </div>`).join('')||'<p style="color:var(--text-muted);font-size:13px">No homework for this subject.</p>'}
+          </div>`).join('')||'<p style="color:var(--text-muted);font-size:14px;">No homework for this subject.</p>'}
       </div>
     </div>`;
   }).join('');
@@ -675,30 +728,39 @@ function renderSubjects(){
 function toggleSubj(id){document.getElementById('subj-body-'+id).classList.toggle('open');}
 
 async function toggleTopic(subjId,idx,val){
-  playClick();
   const s=appData.subjects.find(x=>x.id===subjId);if(!s)return;
   s.topics[idx].done=val;
+  if(!val)s.topics[idx].difficulty=0; // clear difficulty if unchecked
   await db.collection('subjects').doc(subjId).update({topics:s.topics});
-  if(val)playSuccess();
+  if(val)launchConfetti();
   renderSubjects();renderDashboard();
+}
+
+async function setDifficulty(subjId,idx,stars){
+  const s=appData.subjects.find(x=>x.id===subjId);if(!s)return;
+  s.topics[idx].difficulty=stars;
+  await db.collection('subjects').doc(subjId).update({topics:s.topics});
+  renderSubjects();
 }
 
 async function addTopic(subjId){
   const inp=document.getElementById('nt-'+subjId);
   const name=(inp.value||'').trim();if(!name)return;
   const s=appData.subjects.find(x=>x.id===subjId);if(!s)return;
-  s.topics=[...(s.topics||[]),{name,done:false}];
+  s.topics=[...(s.topics||[]),{name,done:false,difficulty:0}];
   await db.collection('subjects').doc(subjId).update({topics:s.topics});
-  inp.value='';playSuccess();renderSubjects();
+  inp.value='';renderSubjects();
+  // re-open the subject body
+  setTimeout(()=>{const b=document.getElementById('subj-body-'+subjId);if(b)b.classList.add('open');},50);
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // HOMEWORK
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function renderHomework(filter){
   hwFilter=filter||'all';
-  const isTeacher=currentUser&&currentUser.role==='teacher';
-  const all=isTeacher?appData.homework:appData.homework.filter(h=>h.studentId===currentUser.id);
+  const isT=currentUser&&currentUser.role==='teacher';
+  const all=isT?appData.homework:appData.homework.filter(h=>h.studentId===currentUser.id);
   const subjects=[...new Set(all.map(h=>h.subject).filter(Boolean))];
   document.getElementById('hw-filter-bar').innerHTML=
     `<button class="btn btn-sm ${hwFilter==='all'?'btn-primary':''}" onclick="renderHomework('all')">All</button>`+
@@ -706,43 +768,32 @@ function renderHomework(filter){
   const list=hwFilter==='all'?all:all.filter(h=>h.subject===hwFilter);
   const pending=list.filter(h=>!h.done),done=list.filter(h=>h.done);
   document.getElementById('homework-list').innerHTML=
-    `<div class="card-title" style="margin-bottom:10px">Pending (${pending.length})</div>`+
+    `<div class="card-title" style="margin-bottom:12px;">Pending (${pending.length})</div>`+
     (pending.map(h=>`<div class="check-item">
       <input type="checkbox" onchange="markHwDone('${h.id}',this.checked)"/>
       <div class="hw-desc"><strong>${escHtml(h.subject)}</strong> — ${escHtml(h.description)}</div>
       <div class="due">${h.dueDate||''}</div>
-    </div>`).join('')||'<p style="color:var(--text-muted);font-size:13px;margin-bottom:14px">Nothing pending! 🎉</p>')+
-    `<div class="divider"></div><div class="card-title" style="margin-bottom:10px">Completed (${done.length})</div>`+
+    </div>`).join('')||'<p style="color:var(--text-muted);font-size:15px;margin-bottom:16px;">Nothing pending! 🎉</p>')+
+    `<div class="divider"></div><div class="card-title" style="margin-bottom:12px;">Completed (${done.length})</div>`+
     (done.map(h=>`<div class="check-item done">
       <input type="checkbox" checked onchange="markHwDone('${h.id}',this.checked)"/>
       <div class="hw-desc"><strong>${escHtml(h.subject)}</strong> — ${escHtml(h.description)}</div>
-    </div>`).join('')||'<p style="color:var(--text-muted);font-size:13px">No completed homework yet.</p>');
+    </div>`).join('')||'<p style="color:var(--text-muted);font-size:15px;">No completed homework yet.</p>');
 }
 
 async function markHwDone(id,val){
   await db.collection('homework').doc(id).update({done:val});
   const h=appData.homework.find(x=>x.id===id);if(h)h.done=val;
-  if(val){playSuccess();launchConfetti();}else{playClick();}
+  if(val)launchConfetti();
   renderHomework(hwFilter);renderDashboard();
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // SCHEDULER
-// ════════════════════════════════════════
-function getMonday(d){
-  const dt=new Date(d),day=dt.getDay(),diff=dt.getDate()-day+(day===0?-6:1);
-  dt.setDate(diff);dt.setHours(0,0,0,0);return dt;
-}
-
-function blockClass(type){
-  if(type==='break')return 'break-block';
-  if(type==='brain')return 'brain-block';
-  if(type==='free')return 'free-block';
-  return '';
-}
+// ══════════════════════════════════════════
 
 function renderScheduler(){
-  const isTeacher=currentUser&&currentUser.role==='teacher';
+  const isT=currentUser&&currentUser.role==='teacher';
   const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
   const todayStr=new Date().toLocaleDateString('en-CA');
   let html='';
@@ -751,13 +802,13 @@ function renderScheduler(){
     const dateStr=d.toLocaleDateString('en-CA');
     const blocks=appData.schedule.filter(b=>b.date===dateStr).sort((a,b)=>a.startTime.localeCompare(b.startTime));
     html+=`<div class="day-col">
-      <div class="day-header ${dateStr===todayStr?'today':''}">${days[i]}<br/><span style="font-size:10px;color:var(--text-muted)">${d.getDate()}/${d.getMonth()+1}</span></div>
+      <div class="day-header ${dateStr===todayStr?'today':''}">${days[i]}<br/><span style="font-size:10px;color:var(--text-muted);">${d.getDate()}/${d.getMonth()+1}</span></div>
       <div class="day-blocks">${blocks.map(b=>`
         <div class="sched-block ${blockClass(b.type)}">
           <div class="sb-time">${b.startTime}–${b.endTime}</div>
           <div class="sb-name">${escHtml(b.name)}</div>
           ${b.durationMins?`<button class="sb-timer-btn" onclick="openTimer('${escAttr(b.name)}',${b.durationMins})">▶ ${b.durationMins}m</button>`:''}
-          ${isTeacher?`<button class="sb-del-btn" onclick="deleteBlock('${b.id}')">✕ remove</button>`:''}
+          ${isT?`<button class="sb-del-btn" onclick="deleteBlock('${b.id}')">✕ remove</button>`:''}
         </div>`).join('')}
       </div>
     </div>`;
@@ -775,7 +826,7 @@ function nextWeek(){currentWeekStart.setDate(currentWeekStart.getDate()+7);rende
 function openAddBlockModal(){
   const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   document.getElementById('modal-content').innerHTML=`
-    <div class="card-title" style="margin-bottom:18px">Add Schedule Block</div>
+    <div class="card-title" style="margin-bottom:20px;">Add Schedule Block</div>
     <div class="form-row"><label>Day of the week</label>
       <select id="m-day">${days.map((d,i)=>`<option value="${i}">${d}</option>`).join('')}</select></div>
     <div class="form-grid">
@@ -790,9 +841,9 @@ function openAddBlockModal(){
         <option value="brain">🧠 Brain break</option>
         <option value="free">🎮 Free time</option>
       </select></div>
-    <div class="form-row"><label>Timer (minutes) — set 0 for no timer</label>
-      <input type="number" id="m-dur" value="0" min="0" max="300" style="width:100px"/></div>
-    <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap">
+    <div class="form-row"><label>Timer duration in minutes (0 = no timer)</label>
+      <input type="number" id="m-dur" value="0" min="0" max="300" style="width:110px;"/></div>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
       <button class="btn btn-primary" onclick="saveBlock()">Save block</button>
       <button class="btn" onclick="closeModal()">Cancel</button>
     </div>`;
@@ -802,24 +853,23 @@ function openAddBlockModal(){
 async function saveBlock(){
   const dayIdx=parseInt(document.getElementById('m-day').value);
   const d=new Date(currentWeekStart);d.setDate(d.getDate()+dayIdx);
-  const name=document.getElementById('m-name').value.trim()||'Block';
   const block={
     date:d.toLocaleDateString('en-CA'),
     startTime:document.getElementById('m-start').value,
     endTime:document.getElementById('m-end').value,
-    name,
+    name:document.getElementById('m-name').value.trim()||'Block',
     type:document.getElementById('m-type').value,
     durationMins:parseInt(document.getElementById('m-dur').value)||0
   };
   const ref=await db.collection('schedule').add(block);
   appData.schedule.push({id:ref.id,...block});
-  closeModal();playSuccess();renderScheduler();renderDashboard();
+  closeModal();renderScheduler();renderDashboard();
 }
 
 async function deleteBlock(id){
   await db.collection('schedule').doc(id).delete();
   appData.schedule=appData.schedule.filter(b=>b.id!==id);
-  playClick();renderScheduler();
+  renderScheduler();
 }
 
 async function repeatWeek(){
@@ -836,22 +886,21 @@ async function repeatWeek(){
       appData.schedule.push({id:ref.id,...nb});
     }
   }
-  playSuccess();renderScheduler();showToast('✅','Done!',`Schedule repeated for ${weeks} week(s)`);
+  renderScheduler();showToast('✅','Done!',`Schedule repeated for ${weeks} week(s)`);
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // TIMER
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function openTimer(name,mins){
   timerSubjectName=name;timerSeconds=mins*60;timerOrigSeconds=mins*60;timerRunning=false;
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   document.getElementById('timer-subject').textContent=name;
-  document.getElementById('timer-label').textContent=mins+' minute session';
+  document.getElementById('timer-label').textContent=mins+' minute focus session';
   document.getElementById('timer-toggle-btn').textContent='▶ Start';
   document.getElementById('timer-display').classList.remove('urgent');
   updateTimerDisplay();
   document.getElementById('timer-overlay').classList.add('show');
-  playClick();
 }
 
 function closeTimer(){
@@ -870,7 +919,6 @@ function toggleTimer(){
     timerInterval=setInterval(()=>{
       timerSeconds--;
       updateTimerDisplay();
-      if(timerSeconds<=10&&timerSeconds>0)playTone(800,'sine',0.1,0.15);
       if(timerSeconds<=0){clearInterval(timerInterval);timerRunning=false;timerDone();}
     },1000);
   }
@@ -884,31 +932,30 @@ function resetTimer(){
 }
 
 function updateTimerDisplay(){
-  const m=Math.floor(Math.max(0,timerSeconds)/60),s=Math.max(0,timerSeconds)%60;
-  document.getElementById('timer-display').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const s=Math.max(0,timerSeconds);
+  const m=Math.floor(s/60),sec=s%60;
+  document.getElementById('timer-display').textContent=`${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
   document.getElementById('timer-display').classList.toggle('urgent',timerSeconds<=30&&timerSeconds>0);
 }
 
 function timerDone(){
-  playCelebration();launchConfetti();
+  launchConfetti();
   document.getElementById('timer-display').textContent='00:00';
-  showToast('🎉','Time\'s up!',escHtml(timerSubjectName)+' session complete — amazing work!');
+  showToast('🎉','Time\'s up!',escHtml(timerSubjectName)+' session complete — great work!');
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // CONFETTI
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function launchConfetti(){
   const canvas=document.getElementById('confetti-canvas');
   canvas.style.display='block';
   canvas.width=window.innerWidth;canvas.height=window.innerHeight;
   const ctx=canvas.getContext('2d');
-  const colors=['#D4AF37','#F0D060','#FFF8DC','#C0A020','#FFFFFF','#FFD700'];
-  const pieces=Array.from({length:140},()=>({
-    x:Math.random()*canvas.width,y:-20,
-    r:Math.random()*5+3,d:Math.random()*3+2,
-    color:colors[Math.floor(Math.random()*colors.length)],
-    tilt:Math.random()*10-10,tiltAngle:0,tiltSpeed:Math.random()*0.1+0.05
+  const colors=['#D4AF37','#F5DC6A','#FFF8DC','#C0A020','#FFFFFF','#FFD700'];
+  const pieces=Array.from({length:150},()=>({
+    x:Math.random()*canvas.width,y:-20,r:Math.random()*6+3,d:Math.random()*3+2,
+    color:colors[Math.floor(Math.random()*colors.length)],tilt:Math.random()*10-10,tiltAngle:0,tiltSpeed:Math.random()*0.1+0.05
   }));
   let frame=0;
   const anim=setInterval(()=>{
@@ -918,15 +965,15 @@ function launchConfetti(){
       ctx.beginPath();ctx.lineWidth=p.r;ctx.strokeStyle=p.color;
       ctx.moveTo(p.x+p.tilt+p.r/2,p.y);ctx.lineTo(p.x+p.tilt,p.y+p.tilt+p.r/2);ctx.stroke();
     });
-    if(++frame>90){clearInterval(anim);canvas.style.display='none';}
+    if(++frame>100){clearInterval(anim);canvas.style.display='none';}
   },16);
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // NOTICES
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function renderNotices(){
-  const isTeacher=currentUser&&currentUser.role==='teacher';
+  const isT=currentUser&&currentUser.role==='teacher';
   document.getElementById('notices-list').innerHTML=appData.notices.length
     ?appData.notices.map(n=>`<div class="notice">
       <div class="notice-content">
@@ -934,21 +981,21 @@ function renderNotices(){
         <div class="notice-body">${escHtml(n.body)}</div>
         <div class="notice-date">${n.createdAt&&n.createdAt.toDate?n.createdAt.toDate().toLocaleDateString('en-ZA'):''}</div>
       </div>
-      ${isTeacher?`<button class="btn btn-sm btn-danger" style="flex-shrink:0" onclick="deleteNotice('${n.id}')">✕</button>`:''}
+      ${isT?`<button class="btn btn-sm btn-danger" style="flex-shrink:0;" onclick="deleteNotice('${n.id}')">✕</button>`:''}
     </div>`).join('')
-    :'<p style="color:var(--text-muted)">No notices yet.</p>';
+    :'<p style="color:var(--text-muted);font-size:15px;">No notices yet.</p>';
 }
 
 async function deleteNotice(id){
   if(!confirm('Delete this notice?'))return;
   await db.collection('notices').doc(id).delete();
   appData.notices=appData.notices.filter(n=>n.id!==id);
-  playClick();renderNotices();renderDashboard();
+  renderNotices();renderDashboard();
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // TEACHER PANEL
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function renderTeacherPanel(){
   renderStudentsTable();
   populateTeacherSelects();
@@ -959,18 +1006,21 @@ function renderTeacherPanel(){
 
 function renderStudentsTable(){
   document.getElementById('students-table').innerHTML=appData.students.length
-    ?`<div class="card" style="margin-top:16px"><div class="card-title">ALL STUDENTS</div>`+
-      appData.students.map(s=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
-        <div style="flex:1;font-size:14px">${escHtml(s.name)}</div>
+    ?`<div class="card" style="margin-top:18px;"><div class="card-title">ALL STUDENTS</div>`+
+      appData.students.map(s=>`<div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);">
+        <div style="flex:1;font-size:15px;font-weight:500;">${escHtml(s.name)}</div>
         <div class="badge">Code: ${escHtml(s.code)}</div>
         <button class="btn btn-sm btn-danger" onclick="deleteStudent('${s.id}')">Remove</button>
       </div>`).join('')+'</div>'
-    :'<p style="color:var(--text-muted);margin-top:16px;font-size:14px">No students yet.</p>';
+    :'<p style="color:var(--text-muted);margin-top:18px;font-size:15px;">No students yet.</p>';
 }
 
 function populateTeacherSelects(){
   const opts=appData.students.map(s=>`<option value="${s.id}">${escHtml(s.name)}</option>`).join('');
-  ['hw-student-sel','subj-student-sel'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=opts||'<option value="">No students yet</option>';});
+  ['hw-student-sel','subj-student-sel'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.innerHTML=opts||'<option value="">No students yet</option>';
+  });
   loadSubjectsForHw();loadSubjMgrList();
 }
 
@@ -986,20 +1036,20 @@ function loadSubjMgrList(){
   const subjs=appData.subjects.filter(s=>s.studentId===sid);
   const el=document.getElementById('subj-mgr-list');if(!el)return;
   el.innerHTML=subjs.length
-    ?subjs.map(s=>`<div class="subject-card" style="margin-bottom:10px">
-      <div class="subject-header" style="cursor:default">
-        <div class="subject-dot" style="background:${s.color||'#D4AF37'}"></div>
+    ?subjs.map(s=>`<div class="subject-card" style="margin-bottom:12px;">
+      <div class="subject-header" style="cursor:default;">
+        <div class="subject-dot" style="background:${s.color||'#D4AF37'};color:${s.color||'#D4AF37'};"></div>
         <div class="subject-name">${escHtml(s.name)}</div>
-        <input type="text" id="nt-mgr-${s.id}" placeholder="New topic…" style="width:160px"/>
+        <input type="text" id="nt-mgr-${s.id}" placeholder="New topic…" style="width:180px;"/>
         <button class="btn btn-sm btn-primary" onclick="addTopicMgr('${s.id}')">+ Topic</button>
         <button class="btn btn-sm btn-danger" onclick="deleteSubject('${s.id}')">✕ Delete</button>
       </div>
-      <div style="padding:8px 20px 12px;display:flex;flex-wrap:wrap;gap:6px">
-        ${(s.topics||[]).map(t=>`<span style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:12px;${t.done?'text-decoration:line-through;color:var(--text-dim)':''}">${escHtml(t.name)}</span>`).join('')}
-        ${!(s.topics||[]).length?'<span style="color:var(--text-muted);font-size:12px">No topics yet</span>':''}
+      <div style="padding:10px 22px 14px;display:flex;flex-wrap:wrap;gap:8px;">
+        ${(s.topics||[]).map(t=>`<span style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:13px;${t.done?'text-decoration:line-through;color:var(--text-dim);':''}">${escHtml(t.name)}${t.difficulty?` ${'★'.repeat(t.difficulty)}`:''}</span>`).join('')}
+        ${!(s.topics||[]).length?'<span style="color:var(--text-muted);font-size:13px;">No topics yet</span>':''}
       </div>
     </div>`).join('')
-    :'<p style="color:var(--text-muted);font-size:13px">No subjects for this student.</p>';
+    :'<p style="color:var(--text-muted);font-size:14px;">No subjects for this student.</p>';
 }
 
 function genCode(){document.getElementById('new-student-code').value='STU-'+Math.floor(1000+Math.random()*9000);}
@@ -1008,22 +1058,20 @@ async function createStudent(){
   const name=document.getElementById('new-student-name').value.trim();
   const code=document.getElementById('new-student-code').value.trim().toUpperCase();
   if(!name||!code){showToast('⚠️','Missing info','Enter both a name and a code.');return;}
-  // Check code not already taken
-  const existing=appData.students.find(s=>s.code===code);
-  if(existing){showToast('⚠️','Code taken',`"${code}" is already used by ${existing.name}.`);return;}
+  if(appData.students.find(s=>s.code===code)){showToast('⚠️','Code taken','That code is already in use.');return;}
   const ref=await db.collection('students').add({name,code});
   appData.students.push({id:ref.id,name,code});
   document.getElementById('new-student-name').value='';
   document.getElementById('new-student-code').value='';
-  playSuccess();showToast('✅','Student created',`${name} — code: ${code}`);
+  showToast('✅','Student created',`${name} — code: ${code}`);
   renderStudentsTable();populateTeacherSelects();
 }
 
 async function deleteStudent(id){
-  if(!confirm('Remove this student? Their data will stay in Firestore.'))return;
+  if(!confirm('Remove this student?'))return;
   await db.collection('students').doc(id).delete();
   appData.students=appData.students.filter(s=>s.id!==id);
-  playClick();renderStudentsTable();
+  renderStudentsTable();
 }
 
 async function addSubject(){
@@ -1034,24 +1082,24 @@ async function addSubject(){
   const ref=await db.collection('subjects').add({name,color,studentId:sid,topics:[]});
   appData.subjects.push({id:ref.id,name,color,studentId:sid,topics:[]});
   document.getElementById('new-subj-name').value='';
-  playSuccess();showToast('📚','Subject added',name);
+  showToast('📚','Subject added',name);
   loadSubjMgrList();renderSubjects();renderDashboard();
 }
 
 async function deleteSubject(id){
-  if(!confirm('Delete this subject and all its topics?'))return;
+  if(!confirm('Delete this subject?'))return;
   await db.collection('subjects').doc(id).delete();
   appData.subjects=appData.subjects.filter(s=>s.id!==id);
-  playClick();loadSubjMgrList();renderSubjects();
+  loadSubjMgrList();renderSubjects();
 }
 
 async function addTopicMgr(subjId){
   const inp=document.getElementById('nt-mgr-'+subjId);
   const name=(inp?.value||'').trim();if(!name)return;
   const s=appData.subjects.find(x=>x.id===subjId);if(!s)return;
-  s.topics=[...(s.topics||[]),{name,done:false}];
+  s.topics=[...(s.topics||[]),{name,done:false,difficulty:0}];
   await db.collection('subjects').doc(subjId).update({topics:s.topics});
-  inp.value='';playSuccess();loadSubjMgrList();renderSubjects();
+  inp.value='';loadSubjMgrList();renderSubjects();
 }
 
 async function assignHomework(){
@@ -1065,7 +1113,7 @@ async function assignHomework(){
   const ref=await db.collection('homework').add(hw);
   appData.homework.push({id:ref.id,...hw});
   document.getElementById('hw-desc').value='';
-  playSuccess();showToast('📝','Homework assigned',description.substring(0,50));
+  showToast('📝','Homework assigned',description.substring(0,50));
   renderHomework(hwFilter);renderDashboard();
 }
 
@@ -1078,7 +1126,7 @@ async function postNotice(){
   appData.notices.unshift({id:ref.id,...n});
   document.getElementById('notice-title-in').value='';
   document.getElementById('notice-body-in').value='';
-  playSuccess();showToast('📢','Notice posted',title);
+  showToast('📢','Notice posted',title);
   renderNotices();renderDashboard();
 }
 
@@ -1090,7 +1138,7 @@ async function saveReminders(){
   };
   await db.collection('settings').doc('reminders').set(settings);
   appData.reminders=settings;
-  playSuccess();showToast('✅','Reminders saved','Settings updated');
+  showToast('✅','Reminders saved','Settings updated');
   startReminders();
 }
 
@@ -1098,36 +1146,33 @@ async function changeTeacherCode(){
   const current=document.getElementById('current-teacher-code').value.trim().toUpperCase();
   const newCode=document.getElementById('new-teacher-code').value.trim().toUpperCase();
   if(!current||!newCode){showToast('⚠️','Missing info','Fill in both fields.');return;}
-  const doc=await db.collection('settings').doc('teacher').get();
-  const stored=doc.exists?doc.data().teacherCode:'TEACHER-001';
-  if(current!==stored){showToast('⚠️','Wrong code','Current code is incorrect.');playError();return;}
+  const snap=await db.collection('settings').doc('teacher').get();
+  const stored=snap.exists?snap.data().teacherCode:'TEACHER-001';
+  if(current!==stored){showToast('⚠️','Wrong code','Current code is incorrect.');return;}
   await db.collection('settings').doc('teacher').set({teacherCode:newCode});
-  currentUser.code=newCode;
   document.getElementById('current-teacher-code').value='';
   document.getElementById('new-teacher-code').value='';
-  playSuccess();showToast('✅','Code updated',`New teacher code: ${newCode}`);
+  showToast('✅','Code updated','New teacher code: '+newCode);
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // REMINDERS
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function startReminders(){
   reminderTimers.forEach(clearInterval);reminderTimers=[];
   const rem=appData.reminders;
   if(!rem.enabled)return;
   reminderTimers.push(setInterval(()=>{
-    playReminder();
     showToast('🧠','Brain break time!','Step away and stretch for 5 minutes 🧘');
   },(rem.brainInterval||45)*60*1000));
   reminderTimers.push(setInterval(()=>{
-    playReminder();
     showToast('👓','Blue light glasses','Put on your glasses or take a screen break 👀');
   },(rem.blueInterval||60)*60*1000));
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // TOAST
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function showToast(icon,title,msg){
   const c=document.getElementById('toast-container');
   const t=document.createElement('div');
@@ -1137,17 +1182,70 @@ function showToast(icon,title,msg){
   setTimeout(()=>{t.style.transition='.3s';t.style.opacity='0';setTimeout(()=>t.remove(),300);},5000);
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 // MODAL
-// ════════════════════════════════════════
+// ══════════════════════════════════════════
 function openModal(){document.getElementById('modal-overlay').classList.add('show');}
 function closeModal(){document.getElementById('modal-overlay').classList.remove('show');}
 
-// ════════════════════════════════════════
-// UTILS
-// ════════════════════════════════════════
-function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function escAttr(s){return String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+
+// Expose functions globally for onclick handlers
+window.escHtml = escHtml;
+window.escAttr = escAttr;
+window.getMonday = getMonday;
+window.blockClass = blockClass;
+window.attemptLogin = attemptLogin;
+window.loginSuccess = loginSuccess;
+window.logout = logout;
+window.loadAllData = loadAllData;
+window.renderAll = renderAll;
+window.showPage = showPage;
+window.switchTab = switchTab;
+window.updateDashDate = updateDashDate;
+window.renderDashboard = renderDashboard;
+window.diffLabel = diffLabel;
+window.renderSubjects = renderSubjects;
+window.toggleSubj = toggleSubj;
+window.toggleTopic = toggleTopic;
+window.setDifficulty = setDifficulty;
+window.addTopic = addTopic;
+window.renderHomework = renderHomework;
+window.markHwDone = markHwDone;
+window.renderScheduler = renderScheduler;
+window.prevWeek = prevWeek;
+window.nextWeek = nextWeek;
+window.openAddBlockModal = openAddBlockModal;
+window.saveBlock = saveBlock;
+window.deleteBlock = deleteBlock;
+window.repeatWeek = repeatWeek;
+window.openTimer = openTimer;
+window.closeTimer = closeTimer;
+window.toggleTimer = toggleTimer;
+window.resetTimer = resetTimer;
+window.updateTimerDisplay = updateTimerDisplay;
+window.timerDone = timerDone;
+window.launchConfetti = launchConfetti;
+window.renderNotices = renderNotices;
+window.deleteNotice = deleteNotice;
+window.renderTeacherPanel = renderTeacherPanel;
+window.renderStudentsTable = renderStudentsTable;
+window.populateTeacherSelects = populateTeacherSelects;
+window.loadSubjectsForHw = loadSubjectsForHw;
+window.loadSubjMgrList = loadSubjMgrList;
+window.genCode = genCode;
+window.createStudent = createStudent;
+window.deleteStudent = deleteStudent;
+window.addSubject = addSubject;
+window.deleteSubject = deleteSubject;
+window.addTopicMgr = addTopicMgr;
+window.assignHomework = assignHomework;
+window.postNotice = postNotice;
+window.saveReminders = saveReminders;
+window.changeTeacherCode = changeTeacherCode;
+window.startReminders = startReminders;
+window.showToast = showToast;
+window.openModal = openModal;
+window.closeModal = closeModal;
+
+};
 </script>
-</body>
-</html>
